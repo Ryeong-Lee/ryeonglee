@@ -1,9 +1,26 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이채령 — Salon Menu</title>
+    <title>이채령 | Today's Menu — CUT · COLOR · CARE</title>
+    <meta name="description" content="말과 글에 능한 마케터, 이채령의 포트폴리오. SNS·카피(CUT), 영상·숏폼(COLOR), 운영·리포트(CARE)." />
+    <meta name="theme-color" content="#f7f6f3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="이채령 | Today's Menu" />
+    <meta property="og:description" content="CUT · COLOR · CARE — 짧고 선명한 SNS, 톤을 입힌 영상, 매주 손질하는 운영." />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
