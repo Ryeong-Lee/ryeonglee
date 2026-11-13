@@ -7,7 +7,7 @@ import { S, step, after, register, SPRINGS } from "../lib/motion";
 
 const STAGGER = 0.03;
 
-export default function RollLinks({ items, autoplay = true }) {
+export default function RollLinks({ items, autoplay = true, className = "", active = -1, label = "Menu" }) {
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -71,10 +71,20 @@ export default function RollLinks({ items, autoplay = true }) {
   }, [autoplay]);
 
   return (
-    <nav className="rl-nav" ref={navRef} aria-label="Menu">
-      {items.map((it, i) => (
-        <a key={it.label} className="rl" href={it.href} aria-label={`${it.label} ${it.note ?? ""}`}>
-          <span className="rl-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+    <nav className={`rl-nav ${className}`} ref={navRef} aria-label={label}>
+      {items.map((it, i) => {
+        const Tag = it.href ? "a" : "button";
+        return (
+        <Tag
+          key={it.label}
+          className={`rl ${it.tone ? `tone-${it.tone}` : ""} ${i === active ? "is-active" : ""}`}
+          href={it.href}
+          type={it.href ? undefined : "button"}
+          onClick={it.onClick}
+          aria-pressed={it.href ? undefined : i === active}
+          aria-label={`${it.label} ${it.note ?? ""}`.trim()}
+        >
+          {it.num !== false && <span className="rl-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>}
           <span className="rl-word" aria-hidden="true">
             {[...it.label].map((ch, k) => (
               <span key={k} className="rl-ch">
@@ -82,10 +92,11 @@ export default function RollLinks({ items, autoplay = true }) {
               </span>
             ))}
           </span>
-          <span className="rl-dots" aria-hidden="true" />
-          <span className="rl-note" aria-hidden="true">{it.note}</span>
-        </a>
-      ))}
+          {it.note && <span className="rl-dots" aria-hidden="true" />}
+          {it.note && <span className="rl-note" aria-hidden="true">{it.note}</span>}
+        </Tag>
+        );
+      })}
     </nav>
   );
 }
